@@ -29,10 +29,8 @@ import java.util.concurrent.TimeUnit;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-
     private final JwtTokenUtil jwtTokenUtil;
     private final RedisTemplate<String, Object> redisTemplate;
-    private final ObjectMapper objectMapper;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -56,11 +54,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                         // 创建Authentication
                         UsernamePasswordAuthenticationToken authentication =
-                            new UsernamePasswordAuthenticationToken(
-                                userId,
-                                null,
-                                Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
-                            );
+                                new UsernamePasswordAuthenticationToken(
+                                        userId,
+                                        null,
+                                        Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
+                                );
                         authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                         // 设置到SecurityContext

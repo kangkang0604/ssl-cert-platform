@@ -1,11 +1,13 @@
 package com.ssl.platform.controller;
 
+import com.ssl.platform.common.Result;
 import com.ssl.platform.dto.LoginRequest;
 import com.ssl.platform.dto.LoginResponse;
 import com.ssl.platform.dto.RegisterRequest;
 import com.ssl.platform.service.SysUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,15 +23,15 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Tag(name = "认证管理", description = "用户登录、注册等相关接口")
 public class AuthController {
-
-    private final SysUserService sysUserService;
+    @Resource
+    private SysUserService sysUserService;
 
     /**
      * 用户注册
      */
     @PostMapping("/register")
     @Operation(summary = "用户注册", description = "新用户注册账号")
-    public Result<Void> register(@Valid @RequestBody RegisterRequest request) {
+    public Result<String> register(@Valid @RequestBody RegisterRequest request) {
         sysUserService.register(request);
         return Result.success("注册成功");
     }
@@ -53,7 +55,7 @@ public class AuthController {
      */
     @PostMapping("/logout")
     @Operation(summary = "用户登出", description = "用户退出登录")
-    public Result<Void> logout() {
+    public Result<String> logout() {
         // TODO: 从Redis中移除Token
         return Result.success("登出成功");
     }

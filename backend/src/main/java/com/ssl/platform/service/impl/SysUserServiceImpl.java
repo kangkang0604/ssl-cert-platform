@@ -11,6 +11,7 @@ import com.ssl.platform.exception.BusinessException;
 import com.ssl.platform.mapper.SysUserMapper;
 import com.ssl.platform.security.JwtTokenUtil;
 import com.ssl.platform.service.SysUserService;
+import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,9 +29,9 @@ import java.util.concurrent.TimeUnit;
 @Service
 @RequiredArgsConstructor
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
-
     private final SysUserMapper sysUserMapper;
-    private final PasswordEncoder passwordEncoder;
+    @Resource
+    private PasswordEncoder passwordEncoder;
     private final JwtTokenUtil jwtTokenUtil;
     private final RedisTemplate<String, Object> redisTemplate;
 

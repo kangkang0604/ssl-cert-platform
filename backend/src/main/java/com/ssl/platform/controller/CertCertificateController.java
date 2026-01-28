@@ -1,5 +1,6 @@
 package com.ssl.platform.controller;
 
+import com.ssl.platform.common.Result;
 import com.ssl.platform.dto.CertApplyRequest;
 import com.ssl.platform.dto.CertCertificateDTO;
 import com.ssl.platform.dto.CertPageDTO;
@@ -29,12 +30,11 @@ public class CertCertificateController {
      */
     @GetMapping
     @Operation(summary = "分页查询证书", description = "获取当前用户的证书列表")
-    public Result<CertPageDTO> pageCertificates(
-            @AuthenticationPrincipal Long userId,
-            @RequestParam(defaultValue = "1") Integer pageNum,
-            @RequestParam(defaultValue = "10") Integer pageSize,
-            @RequestParam(required = false) String keyword,
-            @RequestParam(required = false) Integer status) {
+    public Result<CertPageDTO> pageCertificates(@AuthenticationPrincipal Long userId,
+                                                @RequestParam(defaultValue = "1") Integer pageNum,
+                                                @RequestParam(defaultValue = "10") Integer pageSize,
+                                                @RequestParam(required = false) String keyword,
+                                                @RequestParam(required = false) Integer status) {
         CertPageDTO page = certCertificateService.pageCertificates(
                 userId, pageNum, pageSize, keyword, status);
         return Result.success(page);
@@ -45,9 +45,8 @@ public class CertCertificateController {
      */
     @GetMapping("/{certId}")
     @Operation(summary = "获取证书详情", description = "获取指定证书的详细信息")
-    public Result<CertCertificateDTO> getCertificateDetail(
-            @AuthenticationPrincipal Long userId,
-            @PathVariable Long certId) {
+    public Result<CertCertificateDTO> getCertificateDetail(@AuthenticationPrincipal Long userId,
+                                                           @PathVariable Long certId) {
         CertCertificateDTO cert = certCertificateService.getCertificateDetail(userId, certId);
         return Result.success(cert);
     }
@@ -57,9 +56,8 @@ public class CertCertificateController {
      */
     @PostMapping
     @Operation(summary = "申请证书", description = "申请新的SSL证书")
-    public Result<Long> applyCertificate(
-            @AuthenticationPrincipal Long userId,
-            @Valid @RequestBody CertApplyRequest request) {
+    public Result<Long> applyCertificate(@AuthenticationPrincipal Long userId,
+                                         @Valid @RequestBody CertApplyRequest request) {
         Long certId = certCertificateService.applyCertificate(userId, request);
         return Result.success("证书申请已提交", certId);
     }
@@ -69,9 +67,8 @@ public class CertCertificateController {
      */
     @DeleteMapping("/{certId}")
     @Operation(summary = "删除证书", description = "删除指定的证书")
-    public Result<Void> deleteCertificate(
-            @AuthenticationPrincipal Long userId,
-            @PathVariable Long certId) {
+    public Result<String> deleteCertificate(@AuthenticationPrincipal Long userId,
+                                            @PathVariable Long certId) {
         certCertificateService.deleteCertificate(userId, certId);
         return Result.success("删除成功");
     }
@@ -81,9 +78,8 @@ public class CertCertificateController {
      */
     @PostMapping("/{certId}/renew")
     @Operation(summary = "手动续期", description = "手动触发证书续期")
-    public Result<Void> renewCertificate(
-            @AuthenticationPrincipal Long userId,
-            @PathVariable Long certId) {
+    public Result<String> renewCertificate(@AuthenticationPrincipal Long userId,
+                                           @PathVariable Long certId) {
         certCertificateService.renewCertificate(userId, certId);
         return Result.success("续期成功");
     }
@@ -93,9 +89,8 @@ public class CertCertificateController {
      */
     @GetMapping("/{certId}/download")
     @Operation(summary = "下载证书", description = "下载证书文件")
-    public Result<CertCertificateDTO> downloadCertificate(
-            @AuthenticationPrincipal Long userId,
-            @PathVariable Long certId) {
+    public Result<CertCertificateDTO> downloadCertificate(@AuthenticationPrincipal Long userId,
+                                                          @PathVariable Long certId) {
         CertCertificateDTO cert = certCertificateService.getCertificateDetail(userId, certId);
         return Result.success(cert);
     }

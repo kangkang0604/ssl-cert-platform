@@ -104,11 +104,11 @@ public class CertCertificateServiceImpl extends ServiceImpl<CertCertificateMappe
 
         // 检查证书数量限制
         int certCount = Math.toIntExact(
-            certCertificateMapper.selectCount(
-                new LambdaQueryWrapper<CertCertificate>()
-                    .eq(CertCertificate::getUserId, userId)
-                    .eq(CertCertificate::getDeleted, 0)
-            )
+                certCertificateMapper.selectCount(
+                        new LambdaQueryWrapper<CertCertificate>()
+                                .eq(CertCertificate::getUserId, userId)
+                                .eq(CertCertificate::getDeleted, 0)
+                )
         );
 
         if (user.getTotalCertCount() > 0 && certCount >= user.getTotalCertCount()) {
@@ -308,38 +308,34 @@ public class CertCertificateServiceImpl extends ServiceImpl<CertCertificateMappe
     /**
      * 获取状态文本
      */
-    private String getStatusText(Integer status) {
-        switch (status) {
-            case Constants.CERT_STATUS_APPLYING:
-                return "申请中";
-            case Constants.CERT_STATUS_ISSUED:
-                return "已签发";
-            case Constants.CERT_STATUS_EXPIRING:
-                return "即将过期";
-            case Constants.CERT_STATUS_EXPIRED:
-                return "已过期";
-            case Constants.CERT_STATUS_REVOKED:
-                return "已吊销";
-            case Constants.CERT_STATUS_FAILED:
-                return "申请失败";
-            default:
-                return "未知";
+    private String getStatusText(int status) {
+        if (status == Constants.CERT_STATUS_APPLYING) {
+            return "申请中";
+        } else if (status == Constants.CERT_STATUS_ISSUED) {
+            return "已签发";
+        } else if (status == Constants.CERT_STATUS_EXPIRING) {
+            return "即将过期";
+        } else if (status == Constants.CERT_STATUS_EXPIRED) {
+            return "已过期";
+        } else if (status == Constants.CERT_STATUS_REVOKED) {
+            return "已吊销";
+        } else if (status == Constants.CERT_STATUS_FAILED) {
+            return "申请失败";
         }
+        return "未知";
     }
 
     /**
      * 获取证书类型文本
      */
-    private String getCertTypeText(Integer certType) {
-        switch (certType) {
-            case Constants.CERT_TYPE_SINGLE:
-                return "单域名";
-            case Constants.CERT_TYPE_MULTI:
-                return "多域名";
-            case Constants.CERT_TYPE_WILDCARD:
-                return "通配符";
-            default:
-                return "未知";
+    private String getCertTypeText(int certType) {
+        if (certType == Constants.CERT_TYPE_SINGLE) {
+            return "单域名";
+        } else if (certType == Constants.CERT_TYPE_MULTI) {
+            return "多域名";
+        } else if (certType == Constants.CERT_TYPE_WILDCARD) {
+            return "通配符";
         }
+        return "未知";
     }
 }
