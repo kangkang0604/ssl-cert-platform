@@ -91,7 +91,8 @@ export const useUserStore = defineStore('user', () => {
   async function getUserInfo() {
     try {
       const response = await getUserInfo()
-      const data = response.data
+      // 后端返回结构: {code, message, data: {...}, timestamp}
+      const data = response.data.data
       packageName.value = data.packageName || '免费版'
       packageExpireTime.value = data.packageExpireTime || ''
       localStorage.setItem('packageName', packageName.value)
