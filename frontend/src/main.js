@@ -15,7 +15,7 @@ const app = createApp(App)
 
 // 创建Pinia实例
 const pinia = createPinia()
-pinia.use(piniaPluginPersisteredstate)
+pinia.use(piniaPluginPersistedstate)
 
 // 注册Element Plus图标
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {

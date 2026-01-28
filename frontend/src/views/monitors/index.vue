@@ -157,7 +157,7 @@ const handleSearch = () => { pagination.pageNum = 1; loadData() }
 const handleReset = () => { Object.assign(filterForm, { keyword: '', status: '' }); handleSearch() }
 const handlePageChange = (page) => { pagination.pageNum = page; loadData() }
 const formatInterval = (seconds) => { if (seconds < 3600) return `${seconds / 60}分钟`; if (seconds < 86400) return `${seconds / 3600}小时`; return `${seconds / 86400}天` }
-const parseChannels = (channels) => (channels || '').split(',').filter(c => c))
+const parseChannels = (channels) => (channels || '').split(',').filter(c => c)
 const getChannelName = (channel) => ({ email: '邮件', wechat: '微信', sms: '短信' }[channel] || channel)
 const getLastStatusType = (status) => ({ 1: 'success', 2: 'warning', 3: 'danger' }[status] || 'info')
 const getLastStatusText = (status) => ({ 1: '正常', 2: '警告', 3: '危险' }[status] || '未知')

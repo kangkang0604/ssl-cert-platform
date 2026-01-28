@@ -154,7 +154,7 @@
           </template>
           <div class="about-section">
             <div class="about-logo">
-              <img src="@/assets/logo.png" alt="Logo" style="width: 80px; height: 80px;" />
+              <img src="@/assets/logo.svg" alt="Logo" style="width: 80px; height: 80px;" />
               <h3>SSL证书自动续期平台</h3>
               <p>版本 1.0.0</p>
             </div>

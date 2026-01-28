@@ -22,8 +22,12 @@ export const useUserStore = defineStore('user', () => {
   async function doLogin(data) {
     try {
       const response = await login(data)
-      const { token: newToken, userId: newUserId, username: newUsername, email: newEmail, avatar: newAvatar } = response.data
-      
+      // 后端返回结构: {code, message, data: {token, userId, ...}, timestamp}
+      // response.data 是后端的Result对象
+      // response.data.data 才是登录的真正数据
+      const loginData = response.data.data
+      const { token: newToken, userId: newUserId, username: newUsername, email: newEmail, avatar: newAvatar } = loginData
+
       token.value = newToken
       userId.value = newUserId
       username.value = newUsername
@@ -113,9 +117,5 @@ export const useUserStore = defineStore('user', () => {
     doRegister,
     doLogout,
     getUserInfo
-  }
-}, {
-  persist: {
-    paths: ['token', 'userId', 'username', 'email', 'avatar', 'packageName', 'packageExpireTime']
   }
 })

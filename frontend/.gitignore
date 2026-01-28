@@ -15,5 +15,3 @@ os_del_doc.cmd
 derby.log
 .cursor
 .history
-node_modules
-dist

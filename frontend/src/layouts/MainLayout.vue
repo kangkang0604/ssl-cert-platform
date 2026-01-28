@@ -3,7 +3,7 @@
     <!-- 侧边栏 -->
     <el-aside :width="isCollapse ? '64px' : '220px'" class="sidebar">
       <div class="logo">
-        <img src="@/assets/logo.png" alt="Logo" />
+        <img src="@/assets/logo.svg" alt="Logo" />
         <span v-show="!isCollapse" class="title">SSL管理</span>
       </div>
 

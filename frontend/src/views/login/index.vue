@@ -2,7 +2,7 @@
   <div class="login-container">
     <div class="login-box">
       <div class="login-header">
-        <img src="@/assets/logo.png" alt="Logo" class="logo" />
+        <img src="@/assets/logo.svg" alt="Logo" class="logo" />
         <h1 class="title">SSL证书自动续期平台</h1>
         <p class="subtitle">安全、高效的SSL证书管理解决方案</p>
       </div>

@@ -2,7 +2,7 @@
   <div class="register-container">
     <div class="register-box">
       <div class="register-header">
-        <img src="@/assets/logo.png" alt="Logo" class="logo" />
+        <img src="@/assets/logo.svg" alt="Logo" class="logo" />
         <h1 class="title">SSL证书自动续期平台</h1>
         <p class="subtitle">注册新账户</p>
       </div>
